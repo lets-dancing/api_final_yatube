@@ -14,7 +14,8 @@ if (
         or not os.path.isdir(os.path.join(BASE_DIR, PROJECT_DIR_NAME))
 ):
     assert False, (
-        f'В директории `{BASE_DIR}` не найдена папка c проектом `{PROJECT_DIR_NAME}`. '
+        f'В директории `{BASE_DIR}` не найдена папка c проектом'
+        f'`{PROJECT_DIR_NAME}`. '
         f'Убедитесь, что у вас верная структура проекта.'
     )
 
@@ -40,7 +41,7 @@ assert filename in root_dir_content, (
     f'В корне проекта не найден файл `{filename}`'
 )
 
-with open(filename, 'r') as f:
+with open(filename, 'r', encoding='utf-8') as f:
     file = f.read()
     assert file != default_md, (
         f'Не забудьте оформить `{filename}`'

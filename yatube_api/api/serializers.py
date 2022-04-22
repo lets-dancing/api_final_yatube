@@ -36,7 +36,7 @@ class FollowSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        fields = '__all__'
+        fields = ('user', 'following')
         model = Follow
         validators = [
             serializers.UniqueTogetherValidator(
