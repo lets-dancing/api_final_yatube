@@ -1,4 +1,5 @@
 from rest_framework import filters, permissions, response, status, viewsets
+from rest_framework.pagination import LimitOffsetPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from django.shortcuts import get_object_or_404
 
@@ -15,7 +16,7 @@ class PostViewSet(viewsets.ModelViewSet):
     ]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    pagination_class = None
+    pagination_class = LimitOffsetPagination
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['group']
 
