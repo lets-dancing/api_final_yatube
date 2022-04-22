@@ -5,9 +5,12 @@ from django.shortcuts import get_object_or_404
 
 from posts.models import Group, Post, User
 from .permission import IsOwnerOrReadOnly
-from .serializers import CommentSerializer, FollowSerializer, GroupSerializer, PostSerializer
-
-
+from .serializers import (
+    CommentSerializer,
+    FollowSerializer,
+    GroupSerializer,
+    PostSerializer
+)
 
 
 class PostViewSet(viewsets.ModelViewSet):
