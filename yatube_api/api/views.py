@@ -1,6 +1,4 @@
-from rest_framework import (
-    filters, mixins, permissions, response, status, viewsets
-)
+from rest_framework import filters, mixins, permissions, viewsets
 from rest_framework.pagination import LimitOffsetPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from django.shortcuts import get_object_or_404
@@ -62,14 +60,8 @@ class FollowViewSet(
         user = get_object_or_404(User, username=self.request.user.username)
         return user.follower
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
 
-
-class GroupViewSet(viewsets.ModelViewSet):
+class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [IsOwnerOrReadOnly]
-
-    def create(self, request):
-        return response.Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
