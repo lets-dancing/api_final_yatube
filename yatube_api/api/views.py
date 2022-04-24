@@ -35,8 +35,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         post = get_object_or_404(Post, pk=self.kwargs.get('post_id'))
-        new_queryset = post.comments.all()
-        return new_queryset
+        return post.comments.all()
 
     def perform_create(self, serializer):
         post = get_object_or_404(Post, pk=self.kwargs.get('post_id'))
@@ -48,7 +47,6 @@ class FollowViewSet(
     mixins.ListModelMixin,
     viewsets.GenericViewSet
 ):
-    http_method_names = ['get', 'post']
     permission_classes = [
         IsOwnerOrReadOnly, permissions.IsAuthenticated,
     ]
@@ -58,7 +56,7 @@ class FollowViewSet(
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.request.user.username)
-        return user.follower
+        return user.follower.all()
 
 
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
